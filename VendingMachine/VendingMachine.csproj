@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VendingMachineCore\VendingMachineCore.csproj">
+      <Project>{b8111684-cb37-4797-af77-bd999d2e8df8}</Project>
+      <Name>VendingMachineCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
