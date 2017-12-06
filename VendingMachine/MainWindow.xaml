@@ -4,9 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SlotMachine"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        mc:Ignorable="d"  DataContext="{StaticResource MainWindowViewModel}"
+        Title="{Binding WindowTitle}" Height="550" Width="725">
     <Grid>
-        
+        <StackPanel Orientation="Vertical" Margin="20">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Item: " />
+                <ComboBox HorizontalAlignment="Left" Width="120" ItemsSource="{Binding Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding SelectedProductView}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <DataGrid ItemsSource="{Binding CashInputDenominations}" HorizontalAlignment="Left" AutoGenerateColumns="False" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Width="100" IsReadOnly="True" Binding="{Binding CoinLabel}" />
+                        <DataGridTextColumn Header="Count" Width="70" IsReadOnly="False" Binding="{Binding Count}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid ItemsSource="{Binding CashOutputDenominations}" HorizontalAlignment="Left" AutoGenerateColumns="False" Margin="15,0,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Width="100" IsReadOnly="True" Binding="{Binding CoinLabel}" />
+                        <DataGridTextColumn Header="Count" Width="70" IsReadOnly="False" Binding="{Binding Count}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel>
+                <Button Content="Purchase" Margin="5,0,0,0" HorizontalAlignment="Left" Width="80" Command="{Binding PurchaseCommand}"/>
+                <Label Content="{Binding PurchaseOutput}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="15,20,0,0">
+                    <Label Content="Product Store Details" />
+                    <ListView ItemsSource="{Binding ProductStoreDetails}" HorizontalAlignment="Left">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Product" Width="120" DisplayMemberBinding="{Binding ProductName}"/>
+                                <GridViewColumn Header="Stock Count" Width="150" DisplayMemberBinding="{Binding Count}" />
+                                <GridViewColumn Header="Stock Cost" Width="150" DisplayMemberBinding="{Binding Cost}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
